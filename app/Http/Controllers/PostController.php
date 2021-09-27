@@ -88,8 +88,11 @@ class PostController extends Controller
 
         $post->update($request->all());
 
-        return redirect()->route('posts.index')
-                                        ->with('success', 'Post updated successfully.');
+        return [
+            'success' => true,
+            'message' => 'success to update user',
+            'error' => [],
+        ];
     }
 
     /**
@@ -102,7 +105,10 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return  redirect()->route('posts.index')
-                                        ->with('success', 'Post deleted successfully.');
+        return [
+            'success' => true,
+            'message' => 'Successfully deleted',
+            'error' => [],
+        ];
     }
 }
