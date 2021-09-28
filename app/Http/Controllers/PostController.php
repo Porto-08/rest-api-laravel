@@ -151,10 +151,11 @@ class PostController extends Controller
     public function search($data)
     {
         try {
-            $filter = Post::where('title', $data)->get();
+            $filter = Post::where('title', 'like', '%'.$data.'%')->get();   
 
-            return [
-               
+            return [  
+                'success' => true,
+                'message' => 'Posts found successfully.',        
                 'data' => $filter,
             ];
 
@@ -162,6 +163,7 @@ class PostController extends Controller
             return [
                 'success' => false,
                 'message' => $th->getMessage(),
+                'data' => $filter,
             ];
         }
     }
