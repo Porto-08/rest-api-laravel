@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cadd819a6415b190ae2704ced6e6c8b",
+    "content-hash": "9721f8f5b9be4fe27777d5c6af10747b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1177,6 +1177,46 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.6.1"
             },
             "time": "2021-03-02T16:53:12+00:00"
+        },
+        {
+            "name": "laravellegends/eloquent-filter",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelLegends/eloquent-filter.git",
+                "reference": "0838392d13c095db67fb5b1ed31ebd7e08640e9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelLegends/eloquent-filter/zipball/0838392d13c095db67fb5b1ed31ebd7e08640e9c",
+                "reference": "0838392d13c095db67fb5b1ed31ebd7e08640e9c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelLegends\\EloquentFilter\\": "src/eloquent-filter/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wallace Maxters",
+                    "email": "wallacemaxters@gmail.com"
+                }
+            ],
+            "description": "A simple Eloquent filter to make easy API filtering",
+            "support": {
+                "issues": "https://github.com/LaravelLegends/eloquent-filter/issues",
+                "source": "https://github.com/LaravelLegends/eloquent-filter/tree/2.1.0"
+            },
+            "time": "2021-09-15T23:31:06+00:00"
         },
         {
             "name": "league/commonmark",

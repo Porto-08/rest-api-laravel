@@ -14,8 +14,16 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return [
+        'message' => 'Rodou.'
+    ];
 });
 
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/posts/edit/{id}', [PostController::class, 'edit']);
+Route::get('/posts/filter/{data}', [PostController::class, 'search']);
 
-Route::resource('posts', PostController::class);
+Route::post('/posts/create', [PostController::class, 'store']);
+Route::put('/posts/update/{id}', [PostController::class, 'update']);
+Route::delete('/posts/delete/{id}', [PostController::class, 'destroy']);

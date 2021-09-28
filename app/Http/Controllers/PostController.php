@@ -71,12 +71,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        $data = Post::find($post);
+        $data = Post::find($id);
 
         try {
-            $data = Post::find($post);
+            $data = Post::find($id);
 
             return $data;
         } catch (\Throwable $th) {
@@ -93,11 +93,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
 
         try {
-            $data = Post::find($post);
+            $data = Post::find($id);
 
             return $data;
         } catch (\Throwable $th) {
@@ -115,7 +115,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
@@ -123,19 +123,47 @@ class PostController extends Controller
         ]);
 
 
+
         try {
-            $post->update($request->all());
+
+            Post::find($id)->update($request->all());
+
+            return [
+                'success' => true,
+                'message' => 'Post update successfully.',
+            ];
         } catch (\Throwable $th) {
             return [
                 'success' => false,
                 'message' => $th->getMessage(),
             ];
         }
+    }
 
-        return [
-            'success' => true,
-            'message' => 'Post update successfully.',
-        ];
+    /**
+     * Filter the specified resource
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+
+    public function search($data)
+    {
+        try {
+            $filter = Post::where('title', $data)->get();
+
+            return [
+               
+                'data' => $filter,
+            ];
+
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'message' => $th->getMessage(),
+            ];
+        }
     }
 
     /**
@@ -144,11 +172,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
 
         try {
-            $post->delete();
+            Post::find($id)->delete();
 
             return [
                 'success' => true,
