@@ -21,9 +21,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'error' => [
-                    'message' => $th->getMessage(),
-                ],
+                'message' => $th->getMessage(),
             ];
         }
     }
@@ -56,9 +54,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'error' => [
-                    'message' => $th->getMessage(),
-                ]
+                'message' => $th->getMessage(),
             ];
         }
 
@@ -66,7 +62,6 @@ class PostController extends Controller
         return [
             'success' => true,
             'message' => 'Post created successfully.',
-            'error' => [],
         ];
     }
 
@@ -87,9 +82,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'error' => [
-                    'message' => $th->getMessage(),
-                ]
+                'message' => $th->getMessage(),
             ];
         }
     }
@@ -110,9 +103,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'error' => [
-                    'message' => $th->getMessage(),
-                ],
+                'message' => $th->getMessage(),
             ];
         }
     }
@@ -137,16 +128,13 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'error' => [
-                    'message' => $th->getMessage(),
-                ],
+                'message' => $th->getMessage(),
             ];
         }
 
         return [
             'success' => true,
             'message' => 'Post update successfully.',
-            'error' => [],
         ];
     }
 
@@ -158,12 +146,19 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
 
-        return [
-            'success' => true,
-            'message' => 'Post successfully deleted',
-            'error' => [],
-        ];
+        try {
+            $post->delete();
+
+            return [
+                'success' => true,
+                'message' => 'Post successfully deleted',
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'message' => $th->getMessage(),
+            ];
+        }
     }
 }
