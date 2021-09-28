@@ -15,7 +15,8 @@ use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return [
-        'message' => 'Rodou.'
+        'success' => true,
+        'message' => 'Server ir on.'
     ];
 });
 

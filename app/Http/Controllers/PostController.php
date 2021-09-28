@@ -21,19 +21,9 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => 'Error: ' . $th->getMessage(),
             ];
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -51,18 +41,17 @@ class PostController extends Controller
 
         try {
             Post::create($request->all());
+
+            return [
+                'success' => true,
+                'message' => 'Post created successfully.',
+            ];
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
             ];
         }
-
-
-        return [
-            'success' => true,
-            'message' => 'Post created successfully.',
-        ];
     }
 
     /**
@@ -73,16 +62,18 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $data = Post::find($id);
-
         try {
             $data = Post::find($id);
 
-            return $data;
+            return [
+                'success' => true,
+                'message' => "Post found successfully.",
+                $data,
+            ];
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
             ];
         }
     }
@@ -99,11 +90,15 @@ class PostController extends Controller
         try {
             $data = Post::find($id);
 
-            return $data;
+            return [
+                'success' => true,
+                'message' => "Post found successfully.",
+                $data,
+            ];
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
             ];
         }
     }
@@ -123,7 +118,6 @@ class PostController extends Controller
         ]);
 
 
-
         try {
 
             Post::find($id)->update($request->all());
@@ -135,7 +129,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
             ];
         }
     }
@@ -151,18 +145,17 @@ class PostController extends Controller
     public function search($data)
     {
         try {
-            $filter = Post::where('title', 'like', '%'.$data.'%')->get();   
+            $filter = Post::where('title', 'like', '%' . $data . '%')->get();
 
-            return [  
+            return [
                 'success' => true,
-                'message' => 'Posts found successfully.',        
+                'message' => 'Posts found successfully.',
                 'data' => $filter,
             ];
-
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
                 'data' => $filter,
             ];
         }
@@ -187,7 +180,7 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return [
                 'success' => false,
-                'message' => $th->getMessage(),
+                'message' => "Error: " . $th->getMessage(),
             ];
         }
     }
