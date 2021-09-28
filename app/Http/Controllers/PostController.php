@@ -35,8 +35,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string',
+            'description' => 'required|string',
         ]);
 
         try {
@@ -113,8 +113,8 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string',
+            'description' => 'required|string',
         ]);
 
 
@@ -169,7 +169,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-
         try {
             Post::find($id)->delete();
 
