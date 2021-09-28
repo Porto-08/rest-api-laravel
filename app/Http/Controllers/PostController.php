@@ -14,9 +14,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::latest()->paginate(5);
+        try {
+            $data = Post::latest()->paginate(10);
 
-        return $data;
+            return $data;
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'error' => [
+                    'message' => $th->getMessage(),
+                ],
+            ];
+        }
     }
 
     /**
@@ -26,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //   
+        //
     }
 
     /**
@@ -42,10 +51,21 @@ class PostController extends Controller
             'description' => 'required',
         ]);
 
-        $data = Post::create($request->all());
+        try {
+            Post::create($request->all());
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'error' => [
+                    'message' => $th->getMessage(),
+                ]
+            ];
+        }
+
 
         return [
             'success' => true,
+            'message' => 'Post created successfully.',
             'error' => [],
         ];
     }
@@ -58,7 +78,20 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $data = Post::find($post);
+
+        try {
+            $data = Post::find($post);
+
+            return $data;
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'error' => [
+                    'message' => $th->getMessage(),
+                ]
+            ];
+        }
     }
 
     /**
@@ -69,7 +102,19 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+
+        try {
+            $data = Post::find($post);
+
+            return $data;
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'error' => [
+                    'message' => $th->getMessage(),
+                ],
+            ];
+        }
     }
 
     /**
@@ -86,11 +131,21 @@ class PostController extends Controller
             'description' => 'required',
         ]);
 
-        $post->update($request->all());
+
+        try {
+            $post->update($request->all());
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'error' => [
+                    'message' => $th->getMessage(),
+                ],
+            ];
+        }
 
         return [
             'success' => true,
-            'message' => 'success to update user',
+            'message' => 'Post update successfully.',
             'error' => [],
         ];
     }
@@ -107,7 +162,7 @@ class PostController extends Controller
 
         return [
             'success' => true,
-            'message' => 'Successfully deleted',
+            'message' => 'Post successfully deleted',
             'error' => [],
         ];
     }
