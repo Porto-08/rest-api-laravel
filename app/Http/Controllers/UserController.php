@@ -43,11 +43,9 @@ class UserController extends Controller
 
         try {
             
-            $password = Hash::make($request->get('password'));
-            
             User::create([
                 'email' => $request->get('email'),
-                'password' => $password,
+                'password' => bcrypt($request->get('password')),
             ]);
 
 
