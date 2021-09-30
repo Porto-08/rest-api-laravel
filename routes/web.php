@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return [
         'success' => true,
-        'message' => 'Server ir on.'
+        'message' => 'Server is on.'
     ];
 });
 
@@ -38,3 +39,21 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+
+// login file
+
+/**Rota para o Login */
+Route::post('auth/login', [AuthController::class, 'login']);
+ 
+Route::middleware(['apiJWT'])->group(function () {
+    /** Informações do usuário logado */
+    Route::get('auth/me', [AuthController::class, 'me']); 
+    /** Encerra o acesso */
+    Route::get('auth/logout', [AuthController::class, 'logout']); 
+    /** Atualiza o token */
+    Route::get('auth/refresh', [AuthController::class, 'refresh']); 
+    /** Listagem dos usuarios cadastrados, este rota serve de teste para verificar a proteção feita pelo jwt */
+    Route::get('/users', [UserController::class, 'index']); 
+    /*Daqui para baixo você pode ir adiciondo todas as rotas que deverão estar protegidas em sua API*/
+});
