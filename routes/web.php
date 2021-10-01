@@ -22,20 +22,16 @@ Route::get('/', function () {
         'message' => 'Server is on.'
     ];
 });
-
-// criar usuario
-Route::post('/api/users/create', [UserController::class, 'store']);
-
-// Login 
+// Publicas
+Route::post('/api/users/create', [UserController::class, 'store']); 
 Route::post('/api/login', [AuthController::class, 'login']);
-Route::post('/api/logout', [AuthController::class, 'logout']);
 
-// Rotas prtegidas por token 
+// Rotas protegidas por token 
 Route::middleware('jwt.auth')->group(function () {
-    // rota para recuperação de dados do User logado
+    // Relacionado a Login
     Route::post('/api/me', [AuthController::class, 'me']);
-    // rota refresh token
     Route::post('/api/refresh', [AuthController::class, 'refresh']);
+    Route::post('/api/logout', [AuthController::class, 'logout']);
 
     // Post
     Route::get('/api/posts', [PostController::class, 'index']);
