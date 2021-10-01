@@ -17,6 +17,7 @@ class CreatePostTbl extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('user_id');
             $table->timestamps();
         });
     }

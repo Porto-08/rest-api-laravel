@@ -23,7 +23,7 @@ Route::get('/', function () {
     ];
 });
 // Publicas
-Route::post('/api/users/create', [UserController::class, 'store']); 
+Route::post('/api/users/create', [UserController::class, 'store']);
 Route::post('/api/login', [AuthController::class, 'login']);
 
 // Rotas protegidas por token 
@@ -36,6 +36,7 @@ Route::middleware('jwt.auth')->group(function () {
     // Post
     Route::get('/api/posts', [PostController::class, 'index']);
     Route::get('/api/posts/{id}', [PostController::class, 'show']);
+    Route::get('/api/posts/user/{user_id}', [PostController::class, 'postUser']);
     Route::get('/api/posts/edit/{id}', [PostController::class, 'edit']);
     Route::get('/api/posts/filter/{data}', [PostController::class, 'search']);
     Route::post('/api/posts/create', [PostController::class, 'store']);

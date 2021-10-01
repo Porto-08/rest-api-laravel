@@ -26,6 +26,22 @@ class PostController extends Controller
         }
     }
 
+    public function postUser($user_id)
+    {
+        try {
+            $data = Post::latest()->paginate(10);
+
+            $user_posts = $data->where('user_id', $user_id);
+
+            return $user_posts;
+        } catch (\Throwable $th) {
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $th->getMessage(),
+            ];
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +53,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'user_id' => 'required',
         ]);
 
         try {

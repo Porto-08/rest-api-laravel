@@ -55,7 +55,7 @@ class AuthController extends Controller
         return [
             'success' => true,
             'message' => 'User found successfully.',
-            'data' => auth()->user('attributes'),
+            'data' => auth()->user(),
         ];
     }
 }
