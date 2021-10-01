@@ -6,39 +6,50 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $passport = $request->all(['email', 'password']);
-
-
 
         $token = auth('api')->attempt($passport);
 
-        if($token) {
+        if ($token) {
             return [
                 'success' => true,
                 'message' => 'User authenticated successfully',
                 'data' => $token,
             ];
-        } else  {
+        } else {
             return [
                 'success' => true,
                 'message' => 'Email or Password incorrect!',
                 'data' => [],
             ];
         }
-
-        return '$token;';
     }
 
-    public function logout() {
+    public function logout()
+    {
         return 'logout';
     }
 
-    public function refresh() {
-        return 'refresh';
+    public function refresh()
+    {
+        $token = auth('api')->refresh();
+
+        return [
+            'success' => true,
+            'message' => 'Token refreshed successfully.',
+            'data' => $token,
+        ];
     }
 
-    public function me() {
-        return 'me';
+    // recuperação dos dados do usuario
+    public function me()
+    {
+        return [
+            'success' => true,
+            'message' => 'User found successfully.',
+            'data' => auth()->user('attributes'),
+        ];
     }
 }

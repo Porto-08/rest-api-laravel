@@ -29,10 +29,13 @@ Route::post('/api/users/create', [UserController::class, 'store']);
 // Login 
 Route::post('/api/login', [AuthController::class, 'login']);
 Route::post('/api/logout', [AuthController::class, 'logout']);
-Route::post('/api/refresh', [AuthController::class, 'refresh']);
-Route::post('/api/me', [AuthController::class, 'me']);
 
+// Rotas prtegidas por token 
 Route::middleware('jwt.auth')->group(function () {
+    // rota para recuperação de dados do User logado
+    Route::post('/api/me', [AuthController::class, 'me']);
+    // rota refresh token
+    Route::post('/api/refresh', [AuthController::class, 'refresh']);
 
     // Post
     Route::get('/api/posts', [PostController::class, 'index']);
