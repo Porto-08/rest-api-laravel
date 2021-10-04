@@ -20,7 +20,7 @@ class AuthController extends Controller
             ];
         } else {
             return [
-                'success' => true,
+                'success' => false,
                 'message' => 'Email or Password incorrect!',
                 'data' => [],
             ];
