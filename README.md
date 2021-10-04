@@ -25,6 +25,7 @@
     - Cadastrar um post;
     - Vizualizar um post;
     - Vizualizar todos os posts;
+    - Filtrar Post por titúlo; 
     - Editar um post; 
     - Deletar um post.
 # License
