@@ -23,8 +23,9 @@
     
    ## Blog
     - Cadastrar um post;
-    - Vizualizar um post;
-    - Vizualizar todos os posts;
+    - Buscar um post;
+    - Buscar todos os posts;
+    - Buscar posts de usuario especifico; 
     - Filtrar Post por titúlo; 
     - Editar um post; 
     - Deletar um post.
